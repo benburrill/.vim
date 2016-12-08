@@ -61,6 +61,12 @@ let &backupdir=fnamemodify(tempname(), ":h") . "/"
 if has("persistent_undo")
     set undofile
     set undodir=~/.vimundo/
+    
+    " undodir needs to exist in order for this to work, so make sure it
+    " does.
+    if exists("*mkdir") && !isdirectory(expand(&undodir))
+        call mkdir(&undodir)
+    endif
 endif
 
 " Swap the behavior for dealing with wrapped lines, the default becomes

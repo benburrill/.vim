@@ -8,7 +8,7 @@ Clone this to `~/.vim` (or `%USERPROFILE%\vimfiles` on windows).  Use
 the [`--recursive` flag](https://www.git-scm.com/docs/git-clone#git-clone---recursive) in order to get all the plugins properly.
 
 ## Usage
-Plugins are installed and handled by [pathogen](https://github.com/tpope/vim-pathogen).  Use `repo-to-submodule.sh` to convert plugins into git submodules of this configuration repo.  Ideally, you should remember to use `git submodule add` each time instead of `git clone`, but `repo-to-submodule.sh` will fix that when you inevitably forget.
+Plugin management is done with [pathogen](https://github.com/tpope/vim-pathogen).  Use `repo-to-submodule.sh` to convert plugin repos into git submodules.  Ideally, you should remember to use `git submodule add` each time instead of `git clone`, but `repo-to-submodule.sh` will fix that when you inevitably forget.
 
 Platform-specific settings can be added in `~/.vimrc` or `~/.gvimrc`.  However, they must source their counterpart in this configuration directory or they will completely override it.
 

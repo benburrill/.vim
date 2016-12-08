@@ -63,11 +63,14 @@ nmap <silent> <leader>u :UndotreeShow<CR>:UndotreeFocus<CR>
 " ^&^& so it doesn't work either.  TODO: figure something out.
 vmap <silent> <leader>b64 :w !base64 -d<CR>
 
+" TODO: clean some of these maps up a bit with some functions
+
 " Swap the behavior for dealing with wrapped lines, the default becomes
 " the g-behavior (see :h gk), and the g versions are mapped to the old
-" default.  TODO: clean this up a bit with some functions!
-inoremap <Up> <C-o>g<Up>
-inoremap <Down> <C-o>g<Down>
+" default.  In insert mode, we must be careful not to mess up the
+" popupmenu-keys, so we must test to see if we're in the popup menu.
+inoremap <expr> <Up> pumvisible()? "\<Up>" : "\<C-o>g\<Up>"
+inoremap <expr> <Down> pumvisible()? "\<Down>" : "\<C-o>g\<Down>"
 noremap <Up> g<Up>
 noremap g<Up> <Up>
 noremap <Down> g<Down>
@@ -88,6 +91,10 @@ map <M-j> <C-w>j
 map <M-k> <C-w>k
 map <M-l> <C-w>l
 
+" This is a very silly mapping that makes the popup menu feel a bit like
+" its own sub-mode of insert.
+inoremap <expr> <Esc> pumvisible()? "\<C-e>" : "\<Esc>"
+
 " Interrobang digraph, because why not‽
 digraph !? 8253
 digraph ?! 8253
@@ -98,6 +105,7 @@ digraph ?! 8253
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabClosePreviewOnPopupClose = 1
 
+set completeopt=menu,longest,preview
 set omnifunc=syntaxcomplete#Complete
 
 " PYTHON 3 IS THE FUTURE!

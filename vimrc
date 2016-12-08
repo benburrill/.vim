@@ -1,23 +1,20 @@
-" Use pathogen for plugins
 execute pathogen#infect()
 Helptags
 
-" Essentials
 set nocompatible
 filetype plugin indent on
 
 " Don't use timeouts to determine the ends of mappings
 set notimeout ttimeout
 
-" Turn on line numbers
+" Line numbers
 set number
 
-" Turn on spell-check in US English
+" Spell-check
 set spell
 set spelllang=en_us
 set spellfile=~/en.utf-8.add
 
-" UTF-8 pls
 set encoding=utf-8
 
 " Use some pep8-style formatting options
@@ -51,6 +48,7 @@ if has("persistent_undo")
     endif
 endif
 
+" Mappings:
 " Sane Y behavior
 map Y y$
 
@@ -114,7 +112,6 @@ set wildmenu
 set wildmode=longest:full,full
 
 " Searching:
-" Use incremental searching
 set incsearch
 
 " Make removing search highlighting a little easier

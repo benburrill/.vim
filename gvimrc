@@ -1,6 +1,3 @@
-" When editing these settings, I can use :so % to reload the file and
-" view the changes in action
-
 " Use the Tomorrow-Night theme
 colorscheme Tomorrow-Night
 

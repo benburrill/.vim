@@ -1,9 +1,5 @@
-" When editing these settings, I can use :so % to reload the file and
-" view the changes in action
-
 " Use pathogen for plugins
 execute pathogen#infect()
-" *I* like to get crazy
 Helptags
 
 " Essentials
@@ -40,20 +36,6 @@ set showcmd
 " Backspace sanity
 set backspace=2
 
-" Sane Y behavior
-map Y y$
-
-" Use backspace for deletion
-nmap <BS> X
-xmap <BS> x
-
-" \u = focus on undo tree
-nmap <silent> <leader>u :UndotreeShow<CR>:UndotreeFocus<CR> 
-
-" ; echo is good at the end but not batch compatible, && gets escaped to
-" ^&^& so it doesn't work either.  TODO: figure something out.
-vmap <silent> <leader>b64 :w !base64 -d<CR>
-
 " Put backups in a temporary directory and store undo files in
 " ~/.vimundo, otherwise they would clutter up project directories.
 set backup
@@ -68,6 +50,20 @@ if has("persistent_undo")
         call mkdir(&undodir)
     endif
 endif
+
+" Sane Y behavior
+map Y y$
+
+" Use backspace for deletion
+nmap <BS> X
+xmap <BS> x
+
+" \u = focus on undo tree
+nmap <silent> <leader>u :UndotreeShow<CR>:UndotreeFocus<CR> 
+
+" ; echo is good at the end but not batch compatible, && gets escaped to
+" ^&^& so it doesn't work either.  TODO: figure something out.
+vmap <silent> <leader>b64 :w !base64 -d<CR>
 
 " Swap the behavior for dealing with wrapped lines, the default becomes
 " the g-behavior (see :h gk), and the g versions are mapped to the old
@@ -88,13 +84,13 @@ noremap gj j
 map <M-Up> <C-w><Up>
 map <M-Down> <C-w><Down>
 map <M-Left> <C-w><Left>
-map <M-Right> <C-w><Right>|" neo-nazi
+map <M-Right> <C-w><Right>
 map <M-h> <C-w>h
 map <M-j> <C-w>j
 map <M-k> <C-w>k
 map <M-l> <C-w>l
 
-" Interobang digraph, because why not?
+" Interrobang digraph, because why not‽
 digraph !? 8253
 digraph ?! 8253
 

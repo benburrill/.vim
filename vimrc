@@ -91,10 +91,6 @@ map <M-j> <C-w>j
 map <M-k> <C-w>k
 map <M-l> <C-w>l
 
-" This is a very silly mapping that makes the popup menu feel a bit like
-" its own sub-mode of insert.
-inoremap <expr> <Esc> pumvisible()? "\<C-e>" : "\<Esc>"
-
 " Interrobang digraph, because why not‽
 digraph !? 8253
 digraph ?! 8253

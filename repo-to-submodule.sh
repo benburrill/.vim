@@ -10,17 +10,19 @@ if [[ "$#" = "0" ]]; then
 fi
 
 for dir; do
-    cd "$dir" || exit 1
+    # No matter what, add the directory.
+    git add "$dir"
+
+    # Not a directory, no big deal, print out the error and move on to
+    # the next one.
+    cd "$dir" || continue
 
     url="$(git config --get remote.origin.url)"
 
     cd - > /dev/null
 
     if [[ "$url" ]]; then
-        git rm --cached "$dir" >& /dev/null
+        git rm -rf --cached "$dir" > /dev/null
         git submodule add "$url" "$dir"
-    else
-        # if we can't make it a submodule, just make sure it is added
-        git add "$dir"
     fi
 done

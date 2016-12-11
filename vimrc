@@ -80,16 +80,11 @@ noremap gk k
 noremap j gj
 noremap gj j
 
-" Easier window navigation (meta+arrows/hjkl)
-" TODO: meta keys don't really work in the terminal
-map <M-Up> <C-w><Up>
-map <M-Down> <C-w><Down>
-map <M-Left> <C-w><Left>
-map <M-Right> <C-w><Right>
-map <M-h> <C-w>h
-map <M-j> <C-w>j
-map <M-k> <C-w>k
-map <M-l> <C-w>l
+" Easier window navigation (ctrl+arrows)
+map <C-Up> <C-w><Up>
+map <C-Down> <C-w><Down>
+map <C-Left> <C-w><Left>
+map <C-Right> <C-w><Right>
 
 " Interrobang digraph, because why not‽
 digraph !? 8253

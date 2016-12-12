@@ -36,7 +36,10 @@ set backspace=2
 " Put backups in a temporary directory and store undo files in
 " ~/.vimundo, otherwise they would clutter up project directories.
 set backup
-let &backupdir=fnamemodify(tempname(), ":h") . "/"
+
+" Removes everything but the temporary directory on all platforms
+set backupdir-=.
+set backupdir-=~/
 if has("persistent_undo")
     set undofile
     set undodir=~/.vimundo/

@@ -109,12 +109,6 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 set completeopt=menu,longest,preview
 set omnifunc=syntaxcomplete#Complete
 
-" PYTHON 3 IS THE FUTURE!
-" TODO: should we move this into ftplugin?
-if has("python3")
-    autocmd FileType python set omnifunc=python3complete#Complete
-endif
-
 " Sane wildmenu completion, I've played around with a few of these, but
 " I think this one's the best.  Also make sure we have wildmenu.
 set wildmenu

@@ -1,4 +1,5 @@
 execute pathogen#infect()
+execute pathogen#infect("~/.vim-bundle/{}")
 Helptags
 
 set nocompatible

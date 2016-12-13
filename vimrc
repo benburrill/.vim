@@ -4,6 +4,9 @@ Helptags
 set nocompatible
 filetype plugin indent on
 
+" Use <Space> as my <Leader>
+let mapleader=" "
+
 " Don't use timeouts to determine the ends of mappings
 set notimeout ttimeout
 
@@ -60,11 +63,11 @@ nmap <BS> X
 xmap <BS> x
 
 " \u = focus on undo tree
-nmap <silent> <leader>u :UndotreeShow<CR>:UndotreeFocus<CR> 
+nmap <silent> <Leader>u :UndotreeShow<CR>:UndotreeFocus<CR> 
 
 " ; echo is good at the end but not batch compatible, && gets escaped to
 " ^&^& so it doesn't work either.  TODO: figure something out.
-vmap <silent> <leader>b64 :w !base64 -d<CR>
+vmap <silent> <Leader>b64 :w !base64 -d<CR>
 
 " TODO: clean some of these maps up a bit with some functions
 
@@ -83,11 +86,15 @@ noremap gk k
 noremap j gj
 noremap gj j
 
-" Easier window navigation (ctrl+arrows)
-map <C-Up> <C-w><Up>
-map <C-Down> <C-w><Down>
-map <C-Left> <C-w><Left>
-map <C-Right> <C-w><Right>
+" Easier window navigation (space+arrows/hjkl)
+map <Leader><Up> <C-w><Up>
+map <Leader><Down> <C-w><Down>
+map <Leader><Left> <C-w><Left>
+map <Leader><Right> <C-w><Right>
+map <Leader>h <C-w>h
+map <Leader>j <C-w>j
+map <Leader>k <C-w>k
+map <Leader>l <C-w>l
 
 " Interrobang digraph, because why not‽
 digraph !? 8253

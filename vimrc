@@ -54,6 +54,9 @@ if has("persistent_undo")
     endif
 endif
 
+" Store netrw stuff elsewhere
+let g:netrw_home=expand("~")
+
 " Mappings:
 " Sane Y behavior
 map Y y$

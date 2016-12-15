@@ -37,14 +37,13 @@ set showcmd
 " Backspace sanity
 set backspace=2
 
-" Put backups in a temporary directory and store undo files in
-" ~/.vimundo, otherwise they would clutter up project directories.
-set backup
-
-" Removes everything but the temporary directory on all platforms
-set backupdir-=.
-set backupdir-=~/
+" Prefer undofiles (placed in a separate directory) to backups.
+" Backups can be nice, but I think that undofiles should have all the
+" advantages of backups without getting in the way all the time.  You
+" can put backups in their own directory with backupdir, but they don't
+" get unique names, so it isn't particularly useful.
 if has("persistent_undo")
+    set nobackup
     set undofile
     set undodir=~/.vimundo/
     
@@ -53,6 +52,10 @@ if has("persistent_undo")
     if exists("*mkdir") && !isdirectory(expand(&undodir))
         call mkdir(&undodir)
     endif
+else
+    " If we can't make undofiles just throw backups wherever vim feels
+    " like.
+    set backup
 endif
 
 " Store netrw stuff elsewhere

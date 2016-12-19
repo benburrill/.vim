@@ -125,13 +125,16 @@ set wildmode=longest:full,full
 set incsearch
 set hlsearch
 
-" Make removing search highlighting a little easier.  To prevent arrow
-" keys from triggering this, we use <Esc><Esc>.  We also transform
-" <Esc><Esc> into <Esc> when there is no highlighting to clear.  This is
-" because when I have this mapping I sometimes do something like
-" <Esc><Up> resulting in OA being typed, which enters insert mode and
-" types an A.  See :h v:hlsearch for more info.
-nmap <silent> <expr> <Esc><Esc> v:hlsearch? ":nohl<CR>" : "<Esc>"
+" Make removing search highlighting a little easier.  We can't simply
+" use the <Esc> key because it would conflict with the arrow keys, so we
+" must use <Esc><Esc>.  However, with <Esc><Esc>, it becomes easy to do
+" something like <Esc><Up> which inserts 'A' on the line above.  To fix
+" this, we do an <Esc> at the end.  After that, everything will work,
+" but make a beep if you do an <Esc> first, as that is the default
+" behavior of normal mode <Esc>, so we no-op <Esc> to get rid of the 
+" beep.
+nmap <silent> <Esc><Esc> :nohl<CR><Esc>
+nmap <Esc> <NOP>
 
 " Use the incsearch plugin (even better than plain incsearch)
 " See https://github.com/haya14busa/incsearch.vim for more

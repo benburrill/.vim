@@ -69,12 +69,14 @@ map Y y$
 nmap <BS> X
 xmap <BS> x
 
-" \u = focus on undo tree
+" Make it easy to focus on the undo tree
 nmap <silent> <Leader>u :UndotreeShow<CR>:UndotreeFocus<CR> 
 
-" ; echo is good at the end but not batch compatible, && gets escaped to
-" ^&^& so it doesn't work either.  TODO: figure something out.
-vmap <silent> <Leader>b64 :w !base64 -d<CR>
+" Sometimes I want to base64-decode things, and this makes it easy to do
+" so.  It is compatible with both bash and batch assuming the base64 and
+" printf programs exist.  The parentheses are used to get around what
+" appears to be a vim bug on windows.  :Gblame this for more info.
+vmap <silent> <Leader>b64 :w !<Space>(base64 -d && printf "\n")<CR>
 
 " TODO: clean some of these maps up a bit with some functions
 

@@ -78,7 +78,9 @@ nmap <silent> <Leader>u :UndotreeShow<CR>:UndotreeFocus<CR>
 " appears to be a vim bug on windows.  :Gblame this for more info.
 vmap <silent> <Leader>b64 :w !<Space>(base64 -d && printf "\n")<CR>
 
-" TODO: clean some of these maps up a bit with some functions
+let s:movv = ["<Up>", "<Down>", "k", "j"]
+let s:movh = ["<Left>", "<Right>", "h", "l"]
+let s:mov = s:movv + s:movh
 
 " Swap the behavior for dealing with wrapped lines, the default becomes
 " the g-behavior (see :h gk), and the g versions are mapped to the old
@@ -86,24 +88,15 @@ vmap <silent> <Leader>b64 :w !<Space>(base64 -d && printf "\n")<CR>
 " popupmenu-keys, so we must test to see if we're in the popup menu.
 inoremap <expr> <Up> pumvisible()? "\<Up>" : "\<C-o>g\<Up>"
 inoremap <expr> <Down> pumvisible()? "\<Down>" : "\<C-o>g\<Down>"
-noremap <Up> g<Up>
-noremap g<Up> <Up>
-noremap <Down> g<Down>
-noremap g<Down> <Down>
-noremap k gk
-noremap gk k
-noremap j gj
-noremap gj j
+for s:key in s:movv
+    execute "noremap" s:key "g".s:key
+    execute "noremap" "g".s:key s:key
+endfor
 
 " Easier window navigation (space+arrows/hjkl)
-map <Leader><Up> <C-w><Up>
-map <Leader><Down> <C-w><Down>
-map <Leader><Left> <C-w><Left>
-map <Leader><Right> <C-w><Right>
-map <Leader>h <C-w>h
-map <Leader>j <C-w>j
-map <Leader>k <C-w>k
-map <Leader>l <C-w>l
+for s:key in s:mov
+    execute "map" "<Leader>".s:key "<C-w>".s:key
+endfor
 
 " Interrobang digraph, because why not‽
 digraph !? 8253

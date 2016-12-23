@@ -5,8 +5,8 @@ call pathogen#helptags()
 set nocompatible
 filetype plugin indent on
 
-" Use <Space> as my <Leader>
-let mapleader=" "
+" The space bar is big and easy to reach, so it makes a good <Leader>
+let mapleader="\<Space>"
 
 " Don't use timeouts to determine the ends of mappings
 set notimeout ttimeout

@@ -1,6 +1,6 @@
 execute pathogen#infect()
 execute pathogen#infect("~/.vim-bundle/{}")
-Helptags
+call pathogen#helptags()
 
 set nocompatible
 filetype plugin indent on

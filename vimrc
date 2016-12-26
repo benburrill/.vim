@@ -70,7 +70,7 @@ nmap <BS> X
 xmap <BS> x
 
 " Make it easy to focus on the undo tree
-nmap <silent> <Leader>u :UndotreeShow<CR>:UndotreeFocus<CR> 
+nmap <silent> <Leader>u :UndotreeShow<CR>:UndotreeFocus<CR>
 
 " Sometimes I want to base64-decode things, and this makes it easy to do
 " so.  It is compatible with both bash and batch assuming the base64 and
@@ -126,7 +126,7 @@ set hlsearch
 " something like <Esc><Up> which inserts 'A' on the line above.  To fix
 " this, we do an <Esc> at the end.  After that, everything will work,
 " but make a beep if you do an <Esc> first, as that is the default
-" behavior of normal mode <Esc>, so we no-op <Esc> to get rid of the 
+" behavior of normal mode <Esc>, so we no-op <Esc> to get rid of the
 " beep.
 nmap <silent> <Esc><Esc> :nohl<CR><Esc>
 nmap <Esc> <NOP>

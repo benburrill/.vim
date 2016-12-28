@@ -34,6 +34,10 @@ syntax region pythonFormatStringReplacementField matchgroup=pythonFormatStringBr
     \ start="{\@<!\%({{\)*\zs{{\@!" end="}"
     \ contains=ALLBUT,@pythonContextSensitiveSyntax,@Spell contained
 
+" By adding this region, we properly highlight stuff like f"{({})}".
+syntax region pythonParentheses start=/(/ end=/)/
+    \ contains=ALLBUT,@pythonContextSensitiveSyntax,@Spell contained
+
 " The converter should always be 's', 'r', or 'a' in f-string literals,
 " but we match any character so that this can more easily be used for
 " any format strings.  There should never be any character after the

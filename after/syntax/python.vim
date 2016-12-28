@@ -47,7 +47,7 @@ syntax match pythonFormatStringFormatSpec /:\_.*\ze}/ contained
 " our internal use.
 syntax cluster pythonContextSensitiveSyntax contains=pythonDoctest,pythonDoctestValue
 syntax cluster pythonContextSensitiveSyntax add=pythonFunction,pythonDecoratorName,pythonDecorator
-syntax cluster pythonContextSensitiveSyntax add=pythonFormatStringReplacementField
+syntax cluster pythonContextSensitiveSyntax add=pythonFormatStringReplacementField,pythonFormatStringExpression,pythonFormatStringConverter,pythonFormatStringFormatSpec
 
 highlight default link pythonFormatString pythonString
 highlight default link pythonFormatRawString pythonRawString

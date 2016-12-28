@@ -49,6 +49,8 @@ syntax region pythonInsideSquareBrackets start=/\[/ end=/]/
     \ matchgroup=pythonSquareBrackets
     \ contains=ALLBUT,@pythonContextSensitiveSyntax,@Spell
 
+syntax match pythonFormatStringBadBackslash /\\/ containedin=pythonFormatStringReplacementField contained
+
 " The converter should always be 's', 'r', or 'a' in f-string literals,
 " but we match any character so that this can more easily be used for
 " any format strings.  There should never be any character after the
@@ -74,6 +76,7 @@ highlight default link pythonFormatRawString pythonRawString
 highlight default link pythonFormatStringBrackets Statement
 highlight default link pythonFormatStringConverter Type
 highlight default link pythonFormatStringFormatSpec Operator
+highlight default link pythonFormatStringBadBackslash Error
 " }}}1
 
 " vim: foldmethod=marker

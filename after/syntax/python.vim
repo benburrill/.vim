@@ -34,12 +34,12 @@ syntax match pythonFormatStringExpression /\_.\+/
 " but we match any character so that this can more easily be used for
 " any format strings.  There should never be any character after the
 " converter other than ':' or '}'.
-syntax match pythonFormatStringConverter /!.\ze[:}]/ nextgroup=pythonFormatStringFormatSpec contained
+syntax match pythonFormatStringConverter /!.\ze[:}]/ nextgroup=pythonFormatStringFormatSpec containedin=pythonFormatStringExpression contained
 
 " Proper syntax highlighting for the format spec is pretty much
 " impossible because classes can implement __format__, so we don't worry
 " about any more specific syntax highlighting than this.
-syntax match pythonFormatStringFormatSpec /:\_.*\ze}/ contained
+syntax match pythonFormatStringFormatSpec /:\_.*\ze}/ containedin=pythonFormatStringExpression contained
 
 " python.vim *should* have made a cluster like this, but it didn't.
 " Because of this, python.vim won't be able to know about the f-string

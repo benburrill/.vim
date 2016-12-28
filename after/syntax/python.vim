@@ -34,9 +34,20 @@ syntax region pythonFormatStringReplacementField matchgroup=pythonFormatStringBr
     \ start="{\@<!\%({{\)*\zs{{\@!" end="}"
     \ contains=ALLBUT,@pythonContextSensitiveSyntax,@Spell contained
 
-" By adding this region, we properly highlight stuff like f"{({})}".
-syntax region pythonParentheses start=/(/ end=/)/
-    \ contains=ALLBUT,@pythonContextSensitiveSyntax,@Spell contained
+" Add regions for all bracket types.  These eat up legal syntax in
+" f-strings, preventing the closing brace of a set or the colon of a
+" lambda from being considered part of the replacement field syntax.
+" These are actually useful everywhere, so we don't make them contained
+" and also add matchgroups for them for convenience.
+syntax region pythonInsideParentheses start=/(/ end=/)/
+    \ matchgroup=pythonParentheses
+    \ contains=ALLBUT,@pythonContextSensitiveSyntax,@Spell
+syntax region pythonInsideBrackets start=/{/ end=/}/
+    \ matchgroup=pythonBrackets
+    \ contains=ALLBUT,@pythonContextSensitiveSyntax,@Spell
+syntax region pythonInsideSquareBrackets start=/\[/ end=/]/
+    \ matchgroup=pythonSquareBrackets
+    \ contains=ALLBUT,@pythonContextSensitiveSyntax,@Spell
 
 " The converter should always be 's', 'r', or 'a' in f-string literals,
 " but we match any character so that this can more easily be used for

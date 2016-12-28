@@ -1,7 +1,13 @@
 " Syntax highlighting for Python 3.6 f-strings {{{1
-" Note: nested replacement fields do not work, and are likely either
-" impossible to implement with regexes or require a level of Vim
-" wizardry that I do not yet comprehend.
+" Features:
+"  * Nested replacement fields
+"  * Converter and format specs are highlighted
+"  * Handles escaped '{'s in f-strings
+"  * Support for raw and multi-line f-strings
+" Todo:
+"  * Backslashes in replacement fields should be highlighted with Error
+"   * Maybe more error detection too
+"  * If possible, highlight the spec when a !s, !r, or !a converter exists
 
 " These string regions are heavily inspired by what python.vim does.  We
 " don't need to worry about fu"" strings or the like because they are
@@ -25,21 +31,20 @@ syntax region  pythonFormatRawString matchgroup=pythonTripleQuotes
 " '{'s in a row.  The first and last '{'s in the pattern verify that we
 " are not looking at the middle of a long chain of '{'s.
 syntax region pythonFormatStringReplacementField matchgroup=pythonFormatStringBrackets 
-    \ start="{\@<!\%({{\)*\zs{{\@!" end="}" keepend
-    \ contains=pythonFormatStringExpression,pythonFormatStringConverter,pythonFormatStringFormatSpec contained
-syntax match pythonFormatStringExpression /\_.\+/ 
+    \ start="{\@<!\%({{\)*\zs{{\@!" end="}"
     \ contains=ALLBUT,@pythonContextSensitiveSyntax,@Spell contained
 
 " The converter should always be 's', 'r', or 'a' in f-string literals,
 " but we match any character so that this can more easily be used for
 " any format strings.  There should never be any character after the
-" converter other than ':' or '}'.
-syntax match pythonFormatStringConverter /!.\ze[:}]/ nextgroup=pythonFormatStringFormatSpec containedin=pythonFormatStringExpression contained
+" converter other than ':' or '}'.  We need to do containedin because I
+" don't know of another way to add to an ALLBUT contains.
+syntax match pythonFormatStringConverter /!.\ze[:}]/ nextgroup=pythonFormatStringFormatSpec containedin=pythonFormatStringReplacementField contained
 
 " Proper syntax highlighting for the format spec is pretty much
 " impossible because classes can implement __format__, so we don't worry
 " about any more specific syntax highlighting than this.
-syntax match pythonFormatStringFormatSpec /:\_.*\ze}/ containedin=pythonFormatStringExpression contained
+syntax match pythonFormatStringFormatSpec /:\_.\{-}\ze}/ containedin=pythonFormatStringReplacementField contained
 
 " python.vim *should* have made a cluster like this, but it didn't.
 " Because of this, python.vim won't be able to know about the f-string
@@ -47,7 +52,7 @@ syntax match pythonFormatStringFormatSpec /:\_.*\ze}/ containedin=pythonFormatSt
 " our internal use.
 syntax cluster pythonContextSensitiveSyntax contains=pythonDoctest,pythonDoctestValue
 syntax cluster pythonContextSensitiveSyntax add=pythonFunction,pythonDecoratorName,pythonDecorator
-syntax cluster pythonContextSensitiveSyntax add=pythonFormatStringReplacementField,pythonFormatStringExpression,pythonFormatStringConverter,pythonFormatStringFormatSpec
+syntax cluster pythonContextSensitiveSyntax add=pythonFormatStringReplacementField,pythonFormatStringConverter,pythonFormatStringFormatSpec
 
 highlight default link pythonFormatString pythonString
 highlight default link pythonFormatRawString pythonRawString

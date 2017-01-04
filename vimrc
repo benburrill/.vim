@@ -136,3 +136,6 @@ nmap <Esc> <NOP>
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
+
+" Don't conceal anything in TeX because that makes it look awful!
+let g:tex_conceal = ""

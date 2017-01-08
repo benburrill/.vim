@@ -76,7 +76,8 @@ nmap <silent> <Leader>u :UndotreeShow<CR>:UndotreeFocus<CR>
 " so.  It is compatible with both bash and batch assuming the base64 and
 " printf programs exist.  The parentheses are used to get around what
 " appears to be a vim bug on windows.  :Gblame this for more info.
-vmap <silent> <Leader>b64 :w !<Space>(base64 -d && printf "\n")<CR>
+xmap <silent> <Leader>b64 :w !<Space>(base64 -d && printf "\n")<CR>
+nmap <Leader>b64 viW<Leader>b64
 
 let s:movv = ["<Up>", "<Down>", "k", "j"]
 let s:movh = ["<Left>", "<Right>", "h", "l"]

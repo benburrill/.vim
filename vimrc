@@ -65,6 +65,18 @@ let g:netrw_home=expand("~")
 " Sane Y behavior
 map Y y$
 
+" Line text-objects
+omap <silent> il :normal! ^vg_<CR>
+omap <silent> al :normal! 0v$<CR>
+xmap <silent> <expr> il line('v') == line('.')? "^og_" : (line('v') > line('.')? "^" : "g_")
+xmap <silent> <expr> al line('v') == line('.')? "0o$" : (line('v') > line('.')? "0" : "$")
+
+" File text-objects
+omap af :normal! ggVG<CR>
+omap if :normal! gg0vG$<CR>
+xmap af :<C-u>normal! ggVG<CR>
+xmap if :<C-u>normal! gg0vG$<CR>
+
 " Use backspace for deletion
 nmap <BS> X
 xmap <BS> x

@@ -111,10 +111,6 @@ for s:key in s:mov
     execute "map" "<Leader>".s:key "<C-w>".s:key
 endfor
 
-" Interrobang digraph, because why not‽
-digraph !? 8253
-digraph ?! 8253
-
 " Completion:
 " Make supertab choose completions based on context and remove previews
 " (useful for stuff like pythoncomplete)

@@ -37,3 +37,6 @@
 [submodule "bundle/tomorrow-theme-vim"]
 	path = bundle/tomorrow-theme-vim
 	url = https://github.com/jsit/vim-tomorrow-theme
+[submodule "bundle/vim-dispatch"]
+	path = bundle/vim-dispatch
+	url = https://github.com/tpope/vim-dispatch.git

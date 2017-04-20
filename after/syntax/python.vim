@@ -49,19 +49,32 @@ syntax region pythonInsideSquareBrackets start=/\[/ end=/]/
     \ matchgroup=pythonSquareBrackets
     \ contains=ALLBUT,@pythonContextSensitiveSyntax,@Spell
 
-syntax match pythonFormatStringBadBackslash /\\/ containedin=pythonFormatStringReplacementField contained
 
 " The converter should always be 's', 'r', or 'a' in f-string literals,
 " but we match any character so that this can more easily be used for
 " any format strings.  There should never be any character after the
 " converter other than ':' or '}'.  We need to do containedin because I
 " don't know of another way to add to an ALLBUT contains.
-syntax match pythonFormatStringConverter /!.\ze[:}]/ nextgroup=pythonFormatStringFormatSpec containedin=pythonFormatStringReplacementField contained
+syntax match pythonFormatStringConverter /!.\ze[:}]/ 
+    \ nextgroup=pythonFormatStringFormatSpec
+    \ containedin=pythonFormatStringReplacementField contained
 
 " Proper syntax highlighting for the format spec is pretty much
 " impossible because classes can implement __format__, so we don't worry
 " about any more specific syntax highlighting than this.
-syntax match pythonFormatStringFormatSpec /:\_.\{-}\ze}/ containedin=pythonFormatStringReplacementField contained
+syntax match pythonFormatStringFormatSpec /:\_.\{-}\ze}/
+    \ containedin=pythonFormatStringReplacementField contained
+
+" This isn't perfect, but it's an easy way to catch most instances of
+" bad backslashes.  Certain f-strings like f"{'!\\'}" will be
+" highlighted as if they are correct, and bad-backslash highlighting
+" ignores any non-backslash syntax, but it's about as good as I can do.
+syntax region pythonFormatStringReplacementFieldWithBadBackslash
+    \ start=/\ze[^:!}]\{-}\\/ end=/\ze}/
+    \ contains=pythonFormatStringBadBackslash,pythonFormatStringConverter,pythonFormatStringFormatSpec
+    \ containedin=pythonFormatStringReplacementField contained
+
+syntax match pythonFormatStringBadBackslash /\\/ contained
 
 " python.vim *should* have made a cluster like this, but it didn't.
 " Because of this, python.vim won't be able to know about the f-string
@@ -70,6 +83,7 @@ syntax match pythonFormatStringFormatSpec /:\_.\{-}\ze}/ containedin=pythonForma
 syntax cluster pythonContextSensitiveSyntax contains=pythonDoctest,pythonDoctestValue
 syntax cluster pythonContextSensitiveSyntax add=pythonFunction,pythonDecoratorName,pythonDecorator
 syntax cluster pythonContextSensitiveSyntax add=pythonFormatStringReplacementField,pythonFormatStringConverter,pythonFormatStringFormatSpec
+syntax cluster pythonContextSensitiveSyntax add=pythonFormatStringBadBackslash,pythonFormatStringReplacementFieldWithBadBackslash
 
 highlight default link pythonFormatString pythonString
 highlight default link pythonFormatRawString pythonRawString

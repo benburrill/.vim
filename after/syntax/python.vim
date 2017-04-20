@@ -4,10 +4,7 @@
 "  * Converter and format specs are highlighted
 "  * Handles escaped '{'s in f-strings
 "  * Support for raw and multi-line f-strings
-" Todo:
-"  * Backslashes in replacement fields should be highlighted with Error
-"   * Maybe more error detection too
-"  * If possible, highlight the spec when a !s, !r, or !a converter exists
+"  * Highlights (most) erroneous backslashes in f-strings
 
 " These string regions are heavily inspired by what python.vim does.  We
 " don't need to worry about fu"" strings or the like because they are
@@ -15,13 +12,13 @@
 syntax region pythonFormatString matchgroup=pythonQuotes
     \ start=/[fF]\z(['"]\)/ end=/\z1/ skip=/\\\\\|\\\z1/ keepend
     \ contains=pythonEscape,pythonFormatStringReplacementField,@Spell
-syntax region  pythonFormatString matchgroup=pythonTripleQuotes
+syntax region pythonFormatString matchgroup=pythonTripleQuotes
     \ start=/[fF]\z('''\|"""\)/ end=/\z1/ keepend
     \ contains=pythonEscape,pythonSpaceError,pythonFormatStringReplacementField,@Spell
 syntax region pythonFormatRawString matchgroup=pythonQuotes
     \ start=/\%([rR][fF]\|[fF][rR]\)\z(['"]\)/ end=/\z1/ skip=/\\\\\|\\\z1/ keepend
     \ contains=pythonFormatStringReplacementField,@Spell
-syntax region  pythonFormatRawString matchgroup=pythonTripleQuotes
+syntax region pythonFormatRawString matchgroup=pythonTripleQuotes
     \ start=/\%([rR][fF]\|[fF][rR]\)\z('''\|"""\)/ end=/\z1/ keepend
     \ contains=pythonSpaceError,pythonFormatStringReplacementField,@Spell
 
@@ -48,7 +45,6 @@ syntax region pythonInsideBrackets start=/{/ end=/}/
 syntax region pythonInsideSquareBrackets start=/\[/ end=/]/
     \ matchgroup=pythonSquareBrackets
     \ contains=ALLBUT,@pythonContextSensitiveSyntax,@Spell
-
 
 " The converter should always be 's', 'r', or 'a' in f-string literals,
 " but we match any character so that this can more easily be used for

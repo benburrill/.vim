@@ -116,6 +116,7 @@ endfor
 " (useful for stuff like pythoncomplete)
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabClosePreviewOnPopupClose = 1
+let g:SuperTabCrMapping = 1
 
 set completeopt=menu,longest,preview
 set omnifunc=syntaxcomplete#Complete

@@ -76,8 +76,8 @@ syntax match pythonFormatStringBadBackslash /\\/ contained
 " Because of this, python.vim won't be able to know about the f-string
 " syntax and when not to use it.  Still, we can make such a group for
 " our internal use.
-syntax cluster pythonContextSensitiveSyntax contains=pythonDoctest,pythonDoctestValue
-syntax cluster pythonContextSensitiveSyntax add=pythonFunction,pythonDecoratorName,pythonDecorator
+syntax cluster pythonContextSensitiveSyntax contains=pythonDecoratorName,pythonDecorator,pythonFunction
+syntax cluster pythonContextSensitiveSyntax add=pythonTodo,pythonEscape,pythonDoctest,pythonDoctestValue
 syntax cluster pythonContextSensitiveSyntax add=pythonFormatStringReplacementField,pythonFormatStringConverter,pythonFormatStringFormatSpec
 syntax cluster pythonContextSensitiveSyntax add=pythonFormatStringBadBackslash,pythonFormatStringReplacementFieldWithBadBackslash
 

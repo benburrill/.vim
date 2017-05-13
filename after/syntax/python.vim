@@ -81,6 +81,13 @@ syntax cluster pythonContextSensitiveSyntax add=pythonFunction,pythonDecoratorNa
 syntax cluster pythonContextSensitiveSyntax add=pythonFormatStringReplacementField,pythonFormatStringConverter,pythonFormatStringFormatSpec
 syntax cluster pythonContextSensitiveSyntax add=pythonFormatStringBadBackslash,pythonFormatStringReplacementFieldWithBadBackslash
 
+" pythonAttribute doesn't know about pythonContextSensitiveSyntax and
+" has a tendency to screw everything up so badly that I decided to
+" re-match it.
+syntax clear pythonAttribute
+syntax match pythonAttribute /\.\h\w*/hs=s+1 transparent
+    \ contains=ALLBUT,@pythonContextSensitiveSyntax,pythonBuiltin,pythonAsync
+
 highlight default link pythonFormatString pythonString
 highlight default link pythonFormatRawString pythonRawString
 highlight default link pythonFormatStringBrackets Statement

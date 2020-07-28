@@ -1,7 +1,10 @@
-colorscheme Tomorrow-Night
+" TODO: fonts?
 
-" List of decent fonts, TODO: look at more fonts, decide on sizes and
-" orders.
-set guifont=Consolas:h11,DejaVu\ Sans\ Mono:h10,Liberation\ Mono:w6:h11
-" 0123456789 AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz
-" O0 Il1 Font Test!
+" The cursor has a nasty habit of disappearing when 'go-L' is enabled.
+set guioptions-=L
+
+" When starting gvim from a terminal, I don't care what the size of the
+" terminal was, I always want the window to be the same size to start
+" out with, so I force gvim to use its default dimensions (80x24)
+set columns=80
+set lines=24

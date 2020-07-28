@@ -38,13 +38,16 @@ syntax region pythonFormatStringReplacementField matchgroup=pythonFormatStringBr
 " and also add matchgroups for them for convenience.
 syntax region pythonInsideParentheses start=/(/ end=/)/
     \ matchgroup=pythonParentheses
-    \ contains=ALLBUT,@pythonContextSensitiveSyntax,@Spell
+    \ contains=ALLBUT,@pythonContextSensitiveSyntax
+    \ contains=@NoSpell
 syntax region pythonInsideBrackets start=/{/ end=/}/
     \ matchgroup=pythonBrackets
-    \ contains=ALLBUT,@pythonContextSensitiveSyntax,@Spell
+    \ contains=ALLBUT,@pythonContextSensitiveSyntax
+    \ contains=@NoSpell
 syntax region pythonInsideSquareBrackets start=/\[/ end=/]/
     \ matchgroup=pythonSquareBrackets
-    \ contains=ALLBUT,@pythonContextSensitiveSyntax,@Spell
+    \ contains=ALLBUT,@pythonContextSensitiveSyntax
+    \ contains=@NoSpell
 
 " The converter should always be 's', 'r', or 'a' in f-string literals,
 " but we match any character so that this can more easily be used for
@@ -55,10 +58,12 @@ syntax match pythonFormatStringConverter /!.\ze[:}]/
     \ nextgroup=pythonFormatStringFormatSpec
     \ containedin=pythonFormatStringReplacementField contained
 
-" Proper syntax highlighting for the format spec is pretty much
-" impossible because classes can implement __format__, so we don't worry
-" about any more specific syntax highlighting than this.
-syntax match pythonFormatStringFormatSpec /:\_.\{-}\ze}/
+" Format specs can have replacement fields in them as well as paired-up
+" close brackets, so we need to handle those.  Apart from that, it's
+" pretty much impossible to add any fancy syntax highlighting to format
+" specs because classes can implement __format__ to do whatever.
+syntax region pythonFormatStringFormatSpec start=/:/ skip=/}}/ end=/\ze}/
+    \ contains=pythonFormatStringReplacementField
     \ containedin=pythonFormatStringReplacementField contained
 
 " This isn't perfect, but it's an easy way to catch most instances of
@@ -90,7 +95,7 @@ syntax match pythonAttribute /\.\h\w*/hs=s+1 transparent
 
 highlight default link pythonFormatString pythonString
 highlight default link pythonFormatRawString pythonRawString
-highlight default link pythonFormatStringBrackets Statement
+highlight default link pythonFormatStringBrackets PreProc
 highlight default link pythonFormatStringConverter Type
 highlight default link pythonFormatStringFormatSpec Operator
 highlight default link pythonFormatStringBadBackslash Error

@@ -50,6 +50,9 @@ set showcmd
 " Backspace sanity
 set backspace=2
 
+" Split vertically for diffs
+set diffopt+=vertical
+
 " Let blocks be blocks
 set virtualedit=block
 
